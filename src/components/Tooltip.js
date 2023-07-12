@@ -1,40 +1,33 @@
-import React, { useState } from "react";
+import React from 'react';
 
-const Tooltip = ({ text, children }) => {
-  const [isTooltipVisible, setTooltipVisible] = useState(false);
-  const [isChildrenTooltipVisible, setChildrenTooltipVisible] = useState(false);
+class Tooltip extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isHovered: false
+    };
+  }
 
-  const handleMouseEnter = () => {
-    setTooltipVisible(true);
-  };
+  handleMouseEnter = () => {
+    this.setState({ isHovered: true });
+  }
 
-  const handleMouseLeave = () => {
-    setTooltipVisible(false);
-  };
+  handleMouseLeave = () => {
+    this.setState({ isHovered: false });
+  }
 
-  const handleChildrenMouseEnter = () => {
-    setChildrenTooltipVisible(true);
-  };
+  render() {
+    const { text, children } = this.props;
+    const { isHovered } = this.state;
 
-  const handleChildrenMouseLeave = () => {
-    setChildrenTooltipVisible(false);
-  };
-
-  return (
-    <div>
-      <h2 className={`tooltip ${isTooltipVisible ? "active" : ""}`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-        Hover over me
-        {isTooltipVisible && <div className="tooltiptext">{text}</div>}
-      </h2>
-      <hr />
-
-      <p className={`tooltip ${isChildrenTooltipVisible ? "active" : ""}`} onMouseEnter={handleChildrenMouseEnter} onMouseLeave={handleChildrenMouseLeave}>
-        Hover over me to see another tooltip
-        {isChildrenTooltipVisible && <div className="tooltiptext">{children}</div>}
-      </p>
-      <hr />
-    </div>
-  );
-};
+    return (
+      <div className="tooltip-container" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
+        {children}
+        {isHovered && <div className="tooltip">{text}</div>}
+      </div>
+    );
+  }
+}
 
 export default Tooltip;
+

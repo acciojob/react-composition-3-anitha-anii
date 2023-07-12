@@ -1,1 +1,22 @@
-
+.tootip{
+    background-color: red;
+    color: azure;
+    width: 100px;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    font-weight: 600;
+    height: fit-content;
+    border-radius: 10px;
+}
+.tooltiptext{
+    background-color: red;
+    color: azure;
+    width: 100px;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    font-weight: 500;
+    height: fit-content;
+    border-radius: 10px;
+}

@@ -1,4 +1,4 @@
-.tootip{
+p.tooltip > div{
     background-color: red;
     color: azure;
     width: 100px;
@@ -9,7 +9,7 @@
     height: fit-content;
     border-radius: 10px;
 }
-.tooltiptext{
+h2.tooltip > div{
     background-color: red;
     color: azure;
     width: 100px;

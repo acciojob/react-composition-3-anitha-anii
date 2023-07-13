@@ -31,17 +31,15 @@ const TooltipComponent = () => {
     <div>
       <h2 className='tooltip' onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         Hover over me
-        <div className='tooltip'>{text}</div>
+        {isTooltipVisible && <div className='tooltip'>{text}</div>}
       </h2>
       <hr />
       <p className='tooltip' onMouseEnter={handleChildrenMouseEnter} onMouseLeave={handleChildrenMouseLeave}>
         Hover over me to see another tooltip
-        <div className='tooltiptext'>{children}</div>
+        {isChildrenTooltipVisible && <div className='tooltiptext'>{children}</div>}
       </p>
       <hr />
-      {/* {isTooltipVisible && <div className='tooltip-text'>{text}</div>}
-      {isChildrenTooltipVisible && <div className='tooltip-text'>{children}</div>} */}
-    </div>
+          </div>
   );
 };
 

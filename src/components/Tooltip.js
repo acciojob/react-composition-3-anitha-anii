@@ -1,33 +1,48 @@
-import React from 'react';
 
-class Tooltip extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isHovered: false
-    };
-  }
+import React, { useState } from 'react';
 
-  handleMouseEnter = () => {
-    this.setState({ isHovered: true });
-  }
+const TooltipComponent = () => {
+  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+  const [isChildrenTooltipVisible, setIsChildrenTooltipVisible] = useState(false);
+  const [text, setText] = useState('');
+  const [children, setChildren] = useState('');
 
-  handleMouseLeave = () => {
-    this.setState({ isHovered: false });
-  }
+  const handleMouseEnter = () => {
+    setIsTooltipVisible(true);
+    setText('This is a tooltip');
+  };
 
-  render() {
-    const { text, children } = this.props;
-    const { isHovered } = this.state;
+  const handleMouseLeave = () => {
+    setIsTooltipVisible(false);
+    setText('');
+  };
 
-    return (
-      <div className="tooltip-container" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
-        {children}
-        {isHovered && <div className="tooltip">{text}</div>}
-      </div>
-    );
-  }
-}
+  const handleChildrenMouseEnter = () => {
+    setIsChildrenTooltipVisible(true);
+    setChildren('This is another tooltip');
+  };
 
-export default Tooltip;
+  const handleChildrenMouseLeave = () => {
+    setIsChildrenTooltipVisible(false);
+    setChildren('');
+  };
 
+  return (
+    <div>
+      <h2 className='tooltip' onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        Hover over me
+        <div className='tooltip'>{text}</div>
+      </h2>
+      <hr />
+      <p className='tooltip' onMouseEnter={handleChildrenMouseEnter} onMouseLeave={handleChildrenMouseLeave}>
+        Hover over me to see another tooltip
+        <div className='tooltiptext'>{children}</div>
+      </p>
+      <hr />
+      {/* {isTooltipVisible && <div className='tooltip-text'>{text}</div>}
+      {isChildrenTooltipVisible && <div className='tooltip-text'>{children}</div>} */}
+    </div>
+  );
+};
+
+export default TooltipComponent;

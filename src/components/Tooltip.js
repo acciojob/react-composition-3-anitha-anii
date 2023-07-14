@@ -23,14 +23,14 @@ class Tooltip extends React.Component {
 
     return (
       <div className="tooltip-container">
-        <span
+        <div
           className="tooltip"
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
         >
           {children}
           {showTooltip && <span className="tooltiptext">{text}</span>}
-        </span>
+        </div>
       </div>
     );
   }

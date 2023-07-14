@@ -1,46 +1,39 @@
+import React from 'react';
+import '../styles/App.css'; 
 
-import React, { useState } from 'react';
+class Tooltip extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showTooltip: false
+    };
+  }
 
-const TooltipComponent = () => {
-  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
-  const [isChildrenTooltipVisible, setIsChildrenTooltipVisible] = useState(false);
-  const [text, setText] = useState('');
-  const [children, setChildren] = useState('');
+  handleMouseEnter = () => {
+    this.setState({ showTooltip: true });
+  }
 
-  const handleMouseEnter = () => {
-    setIsTooltipVisible(true);
-    setText('This is a tooltip');
-  };
+  handleMouseLeave = () => {
+    this.setState({ showTooltip: false });
+  }
 
-  const handleMouseLeave = () => {
-    setIsTooltipVisible(false);
-    setText('');
-  };
+  render() {
+    const { text, children } = this.props;
+    const { showTooltip } = this.state;
 
-  const handleChildrenMouseEnter = () => {
-    setIsChildrenTooltipVisible(true);
-    setChildren('This is another tooltip');
-  };
+    return (
+      <div className="tooltip-container">
+        <span
+          className="tooltip"
+          onMouseEnter={this.handleMouseEnter}
+          onMouseLeave={this.handleMouseLeave}
+        >
+          {children}
+          {showTooltip && <span className="tooltiptext">{text}</span>}
+        </span>
+      </div>
+    );
+  }
+}
 
-  const handleChildrenMouseLeave = () => {
-    setIsChildrenTooltipVisible(false);
-    setChildren('');
-  };
-
-  return (
-    <div>
-      <h2 className='tooltip' onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-        Hover over me
-        {isTooltipVisible && <div className='tooltip'>{text}</div>}
-      </h2>
-      <hr />
-      <p className='tooltip' onMouseEnter={handleChildrenMouseEnter} onMouseLeave={handleChildrenMouseLeave}>
-        Hover over me to see another tooltip
-        {isChildrenTooltipVisible && <div className='tooltiptext'>{children}</div>}
-      </p>
-      <hr />
-          </div>
-  );
-};
-
-export default TooltipComponent;
+export default Tooltip;
